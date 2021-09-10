@@ -7,10 +7,14 @@ import android.os.Bundle
 import android.text.Spannable
 import android.text.SpannableStringBuilder
 import android.text.style.ForegroundColorSpan
+import android.view.LayoutInflater
 import android.view.View
+import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.view.isVisible
+import androidx.room.Room
+import com.example.calculator.model.History
 import java.text.NumberFormat
 
 class MainActivity : AppCompatActivity() {
@@ -26,9 +30,11 @@ class MainActivity : AppCompatActivity() {
         findViewById<View>(R.id.historyLayout)
     }
 
-    private val historyLinearLayout: View by lazy {
-        findViewById<View>(R.id.historyLinearLayout)
+    private val historyLinearLayout: LinearLayout by lazy {
+        findViewById<LinearLayout>(R.id.historyLinearLayout)
     }
+
+    lateinit var db: AppDataBase
 
     private var isOperator: Boolean = false
     private var hasOperator: Boolean = false
@@ -36,6 +42,13 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        // Initialize `DB` Object when create application
+        db = Room.databaseBuilder(
+            applicationContext,
+            AppDataBase::class.java,
+            "historyDB"
+        ).build()
     }
 
     fun buttonClicked(view: android.view.View) {
@@ -126,8 +139,22 @@ class MainActivity : AppCompatActivity() {
         hasOperator = false
     }
 
+    @SuppressLint("SetTextI18n")
     fun historyButtonClicked(view: android.view.View) {
         historyLayout.isVisible = true
+        historyLinearLayout.removeAllViews()
+
+        Thread(Runnable{
+            db.historyDao().getAll().reversed().forEach{
+                runOnUiThread{
+                    val historyView = LayoutInflater.from(this).inflate(R.layout.history_row, null,false)
+                    historyView.findViewById<TextView>(R.id.expressionTextView).text = it.expression
+                    historyView.findViewById<TextView>(R.id.resultTextView).text = "= ${it.result}"
+
+                    historyLinearLayout.addView(historyView)
+                }
+            }
+        }).start()
 
         // TODO - Bring all of histories from the DataBase
         // TODO - Allocates all of histories into View
@@ -179,6 +206,11 @@ class MainActivity : AppCompatActivity() {
         val expressionText = expressionTextView.text.toString()
         val resultText = calculateExpression()
 
+        // TODO -> Insert Data into DataBase
+        Thread(Runnable {
+            db.historyDao().insertHistory(History(null, expressionText, resultText))
+        }).start()
+
         resultTextView.text = ""
         expressionTextView.text = resultText
 
@@ -196,8 +228,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun historyClearButtonClicked(view: android.view.View) {
+        historyLinearLayout.removeAllViews()
+
         // TODO - Delete all of History from all of DataBase
         // TODO - Delete all of History from all of View
+        Thread(Runnable{
+            db.historyDao().deleteAll()
+        }).start()
     }
 }
 

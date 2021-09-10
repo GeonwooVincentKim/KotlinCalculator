@@ -1,11 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/historyXML"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/historyLayout"
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+    android:background="@color/white"
+    android:visibility="gone"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="@id/keypadTableLayout"
+    tools:visibility="visible">
 
+    <!--        <include layout="@layout/history_button" android:id="@+id/historyXML"/>-->
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/closeButton"
         android:layout_width="0dp"
@@ -52,4 +60,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
