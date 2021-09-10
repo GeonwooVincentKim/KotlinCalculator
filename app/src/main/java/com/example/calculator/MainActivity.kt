@@ -1,6 +1,7 @@
 package com.example.calculator
 
 import android.annotation.SuppressLint
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Spannable
@@ -85,7 +86,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             hasOperator -> {
-                Toast.makeText(this, "연산자는 한 번만 사용할 수 있습니다.", Toast.LENGTH_SHORT).show()
+                makeTextShort("연산자는 한 번만 사용할 수 있습니다.")
                 return
             }
 
@@ -145,7 +146,33 @@ class MainActivity : AppCompatActivity() {
 
 
     fun resultButtonClicked(view: android.view.View) {
+        val expressionTexts = expressionTextView.text.split(" ")
 
+        /* There is no more to operates values */
+        if (expressionTextView.text.isEmpty() || expressionTexts.size == 1){
+            return
+        }
+
+        /* Input Number and operators and did not input last Number */
+        if (expressionTexts.size != 3 && hasOperator){
+            makeTextShort("아직 완성되지 않은 수식입니다")
+            return
+        }
+
+        if(expressionTexts[0].isNumber().not() || expressionTexts[2].isNumber().not()){
+            makeTextShort("오류가 발생했습니다")
+            return
+        }
+
+        val expressionText = expressionTextView.text.toString()
+        val resultText = calculateExpression()
+
+        resultTextView.text = ""
+    }
+
+    // Extracted function
+    private fun makeTextShort(text: CharSequence): Unit {
+        Toast.makeText(this@MainActivity, text, Toast.LENGTH_SHORT).show()
     }
 }
 
