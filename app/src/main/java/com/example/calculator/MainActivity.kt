@@ -2,6 +2,9 @@ package com.example.calculator
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Spannable
+import android.text.SpannableStringBuilder
+import android.text.style.ForegroundColorSpan
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
@@ -67,7 +70,38 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun operatorButtonClicked(operator: String): Unit {
+        if (expressionTextView.text.isEmpty()){
+            return
+        }
 
+        when {
+            isOperator -> {
+                val text = expressionTextView.text.toString()
+                expressionTextView.text = text.dropLast(1) + operator
+            }
+
+            hasOperator -> {
+                Toast.makeText(this, "연산자는 한 번만 사용할 수 있습니다.", Toast.LENGTH_SHORT).show()
+                return
+            }
+
+            else -> {
+                expressionTextView.append(" $operator")
+            }
+        }
+
+        val ssb = SpannableStringBuilder(expressionTextView.text)
+        ssb.setSpan(
+            ForegroundColorSpan(getColor(R.color.green)),
+            expressionTextView.text.length - 1,
+            expressionTextView.text.length,
+            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
+
+        expressionTextView.text = ssb
+
+        isOperator = true
+        hasOperator = true
     }
 
     fun clearButtonClicked(view: android.view.View) {
