@@ -168,6 +168,10 @@ class MainActivity : AppCompatActivity() {
         val resultText = calculateExpression()
 
         resultTextView.text = ""
+        expressionTextView.text = resultText
+
+        isOperator = false
+        hasOperator = false
     }
 
     // Extracted function
