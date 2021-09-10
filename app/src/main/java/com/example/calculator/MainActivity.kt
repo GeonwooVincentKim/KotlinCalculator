@@ -10,6 +10,7 @@ import android.text.style.ForegroundColorSpan
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.view.isVisible
 import java.text.NumberFormat
 
 class MainActivity : AppCompatActivity() {
@@ -19,6 +20,14 @@ class MainActivity : AppCompatActivity() {
 
     private val resultTextView: TextView by lazy {
         findViewById<TextView>(R.id.resultTextView)
+    }
+
+    private val historyLayout: View by lazy {
+        findViewById<View>(R.id.historyLayout)
+    }
+
+    private val historyLinearLayout: View by lazy {
+        findViewById<View>(R.id.historyLinearLayout)
     }
 
     private var isOperator: Boolean = false
@@ -118,7 +127,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun historyButtonClicked(view: android.view.View) {
+        historyLayout.isVisible = true
 
+        // TODO - Bring all of histories from the DataBase
+        // TODO - Allocates all of histories into View
     }
 
     private fun calculateExpression(): String {
@@ -179,8 +191,14 @@ class MainActivity : AppCompatActivity() {
         Toast.makeText(this@MainActivity, text, Toast.LENGTH_SHORT).show()
     }
 
-    fun closeHistoryButtonClicked(view: android.view.View) {}
-    fun historyClearButtonClicked(view: android.view.View) {}
+    fun closeHistoryButtonClicked(view: android.view.View) {
+        historyLayout.isVisible = false
+    }
+
+    fun historyClearButtonClicked(view: android.view.View) {
+        // TODO - Delete all of History from all of DataBase
+        // TODO - Delete all of History from all of View
+    }
 }
 
 fun String.isNumber(): Boolean {
