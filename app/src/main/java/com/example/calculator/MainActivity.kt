@@ -109,7 +109,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun clearButtonClicked(view: android.view.View) {
+        expressionTextView.text = ""
+        resultTextView.text = ""
 
+        isOperator = false
+        hasOperator = false
     }
 
     fun historyButtonClicked(view: android.view.View) {
