@@ -1,9 +1,9 @@
 <resources>
     <string name="app_name">Calculator</string>
-    <string name="clearButton">C</string>
+    <string name="clear">C</string>
     <string name="roundBracket">()</string>
-    <string name="percentButton">%</string>
-    <string name="divideButton">÷</string>
+    <string name="percent">%</string>
+    <string name="divide">÷</string>
     <string name="multiply">×</string>
     <string name="number9">9</string>
     <string name="number8">8</string>
@@ -18,5 +18,8 @@
     <string name="plus">+</string>
     <string name="zero">0</string>
     <string name="point">.</string>
-    <string name="resultButton">=</string>
+    <string name="result">=</string>
+
+    <string name="close">닫기</string>
+    <string name="clearCalculationHistory">계산기록 삭제</string>
 </resources>

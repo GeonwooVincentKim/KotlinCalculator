@@ -149,17 +149,17 @@ class MainActivity : AppCompatActivity() {
         val expressionTexts = expressionTextView.text.split(" ")
 
         /* There is no more to operates values */
-        if (expressionTextView.text.isEmpty() || expressionTexts.size == 1){
+        if (expressionTextView.text.isEmpty() || expressionTexts.size == 1) {
             return
         }
 
         /* Input Number and operators and did not input last Number */
-        if (expressionTexts.size != 3 && hasOperator){
+        if (expressionTexts.size != 3 && hasOperator) {
             makeTextShort("아직 완성되지 않은 수식입니다")
             return
         }
 
-        if(expressionTexts[0].isNumber().not() || expressionTexts[2].isNumber().not()){
+        if (expressionTexts[0].isNumber().not() || expressionTexts[2].isNumber().not()) {
             makeTextShort("오류가 발생했습니다")
             return
         }
@@ -178,6 +178,9 @@ class MainActivity : AppCompatActivity() {
     private fun makeTextShort(text: CharSequence): Unit {
         Toast.makeText(this@MainActivity, text, Toast.LENGTH_SHORT).show()
     }
+
+    fun closeHistoryButtonClicked(view: android.view.View) {}
+    fun historyClearButtonClicked(view: android.view.View) {}
 }
 
 fun String.isNumber(): Boolean {
