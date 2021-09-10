@@ -15,9 +15,8 @@
     <string name="number1">1</string>
     <string name="number2">2</string>
     <string name="number3">3</string>
-    <string name="resultButton">=</string>
     <string name="plus">+</string>
     <string name="zero">0</string>
     <string name="point">.</string>
-    <string name="equalButton">=</string>
+    <string name="resultButton">=</string>
 </resources>

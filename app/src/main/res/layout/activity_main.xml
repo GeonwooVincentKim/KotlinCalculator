@@ -16,6 +16,34 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_weight="1" />
 
+    <TextView
+        android:id="@+id/expressionTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="44dp"
+        android:layout_marginEnd="15dp"
+        android:gravity="end"
+        android:textColor="@color/black"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/resultTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="15dp"
+        android:gravity="end"
+        android:textColor="@color/lightGray"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/keypadTableLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <TableLayout
         android:id="@+id/keypadTableLayout"
         android:layout_width="0dp"
@@ -282,15 +310,15 @@
                 android:textSize="24sp" />
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/equalButton"
+                android:id="@+id/resultButton"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_margin="7dp"
-                android:background="@drawable/button_background"
+                android:background="@drawable/button_background_green"
                 android:onClick="resultButtonClicked"
                 android:stateListAnimator="@null"
-                android:text="@string/equalButton"
-                android:textColor="@color/green"
+                android:text="@string/resultButton"
+                android:textColor="@color/white"
                 android:textSize="24sp" />
         </TableRow>
 

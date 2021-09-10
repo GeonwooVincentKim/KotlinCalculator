@@ -15,4 +15,6 @@
     <color name="green">#7AAF3B</color>
     <color name="greenPress">#618C2F</color>
     <color name="coral">#FF7F50</color>
+
+    <color name="lightGray">#AAAAAA</color>
 </resources>
